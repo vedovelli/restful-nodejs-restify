@@ -17,6 +17,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "mysql": "^2.14.1",
     "restify": "^5.1.0",
     "restify-cors-middleware": "^1.0.1"
   }
