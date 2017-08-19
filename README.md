@@ -4,8 +4,8 @@
 
 ### Pré-requisitos
 
-. **Node.js** versão 8 ou superior
-. **Nodemon** - `npm i -g nodemon`
+- **Node.js** versão 8 ou superior;
+- **Nodemon** - `npm i -g nodemon`.
 
 ### Instalação
 
@@ -14,7 +14,7 @@
 3. Rode o servidor de desenvolvimento com `npm run dev`.
 4. Edite o arquivo `/src/services/mysql/index.js` e adicione as suas próprias configurações de conexão com o MySQL. Não se esqueça de criar a tabela:
 ```create table categories (id INT(11) unsigned not null auto_increment, name VARCHAR(255), primary key(id));```
-4. O *endpoint* do serviço estará disponível em http://localhost:3456
+4. O *endpoint* do serviço estará disponível em http://localhost:3456 .
 
 ### Sugestão
 
