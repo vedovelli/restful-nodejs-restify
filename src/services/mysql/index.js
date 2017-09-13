@@ -14,7 +14,11 @@ const errorHandler = (error, msg, rejectFunction) => {
 }
 
 const categoryModule = require('./categories')({ connection, errorHandler })
+const usersModule = require('./users')({ connection, errorHandler })
+const authModule = require('./auth')({ connection, errorHandler })
 
 module.exports = {
-  categories: () => categoryModule
+  categories: () => categoryModule,
+  users: () => usersModule,
+  auth: () => authModule
 }
