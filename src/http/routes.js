@@ -4,7 +4,7 @@ const db = require('../services/mysql')
 const routes = (server) => {
   server.post('autenticacao', async (req, res, next) => {
     try {
-      const { email, password } = req.params
+      const { email, password } = req.body
       res.send(await db.auth().authenticate(email, password))
     } catch (error) {
       res.send(error)
@@ -22,7 +22,7 @@ const routes = (server) => {
   })
 
   server.post('categoria', async (req, res, next) => {
-    const { name } = req.params
+    const { name } = req.body
     try {
       res.send(await db.categories().save(name))
     } catch (error) {
@@ -32,7 +32,7 @@ const routes = (server) => {
   })
 
   server.put('categoria', async (req, res, next) => {
-    const { id, name } = req.params
+    const { id, name } = req.body
     try {
       res.send(await db.categories().update(id, name))
     } catch (error) {
@@ -42,7 +42,7 @@ const routes = (server) => {
   })
 
   server.del('categoria', async (req, res, next) => {
-    const { id } = req.params
+    const { id } = req.body
     try {
       res.send(await db.categories().del(id))
     } catch (error) {
