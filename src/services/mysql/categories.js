@@ -14,6 +14,19 @@ const categories = deps => {
         })
       })
     },
+    one: (id) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+
+        connection.query('SELECT * FROM categories WHERE id = ?', id, (error, results) => {
+          if (error) {
+            errorHandler(error, 'Falha ao obter a categoria', reject)
+            return false
+          }
+          resolve({ category: results[0] })
+        })
+      })
+    },
     save: (name) => {
       return new Promise((resolve, reject) => {
         const { connection, errorHandler } = deps
