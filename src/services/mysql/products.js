@@ -14,6 +14,20 @@ const products = deps => {
         })
       })
     },
+    list: (category) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+        const { category_id: categoryId } = category
+
+        connection.query('SELECT * FROM products WHERE category_id = ?', [categoryId], (error, results) => {
+          if (error) {
+            errorHandler(error, 'Falha ao listar as produtos', reject)
+            return false
+          }
+          resolve({ products: results })
+        })
+      })
+    },
     one: (id) => {
       return new Promise((resolve, reject) => {
         const { connection, errorHandler } = deps

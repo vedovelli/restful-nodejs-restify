@@ -15,6 +15,16 @@ test('Lista de produtos', async t => {
   t.is(list.products[0].name, 'product-test')
 })
 
+test('Lista de produtos baseada no ID de determinada categoria', async t => {
+  products.save('product-test1', 1)
+  products.save('product-test2', 1)
+  products.save('product-test3', 2)
+
+  const list = await products.list({ category_id: 1 })
+
+  t.is(list.products.length, 2)
+})
+
 test('Criação de produto', async t => {
   const result = await create()
   t.is(result.product.name, 'product-test')
