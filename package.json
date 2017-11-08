@@ -24,5 +24,6 @@
     "restify": "^5.1.0",
     "restify-cors-middleware": "^1.0.1",
     "sha1": "^1.1.1"
-  }
+  },
+  "dependencies": {}
 }
