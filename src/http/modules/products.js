@@ -31,9 +31,9 @@ module.exports = function products (server) {
   })
 
   server.post('produto', async (req, res, next) => {
-    const { name } = req.body
+    const { name, category_id } = req.body
     try {
-      res.send(await db.products().save(name))
+      res.send(await db.products().save(name, category_id))
     } catch (error) {
       res.send(422, error)
     }
@@ -41,9 +41,9 @@ module.exports = function products (server) {
   })
 
   server.put('produto', async (req, res, next) => {
-    const { id, name } = req.body
+    const { id, name, category_id } = req.body
     try {
-      res.send(await db.products().update(id, name))
+      res.send(await db.products().update(id, name, category_id))
     } catch (error) {
       res.send(422, error)
     }
