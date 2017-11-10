@@ -1,16 +1,51 @@
 
+const uniqBy = require('lodash/uniqBy')
+
+const formatResponse = (results) => {
+  const categories = uniqBy(results, item => item.category_id)
+
+  return categories.map(category => {
+    category.products = results
+      .filter(item => item.category_id === category.id)
+      .map(item => item.product)
+
+    delete category.product_id
+    delete category.product
+    delete category.category_id
+
+    return category
+  })
+}
+
 const categories = deps => {
   return {
     all: () => {
       return new Promise((resolve, reject) => {
         const { connection, errorHandler } = deps
+        const query = 'SELECT c.id, c.name as category, p.id as product_id, p.category_id, p.name as product FROM products as p LEFT JOIN categories as c ON c.id = p.category_id ORDER BY c.id'
 
-        connection.query('SELECT * FROM categories', (error, results) => {
+        connection.query(query, (error, results) => {
           if (error) {
             errorHandler(error, 'Falha ao listar as categorias', reject)
             return false
           }
-          resolve({ categories: results })
+
+          const categories = formatResponse(results)
+
+          resolve({ categories })
+        })
+      })
+    },
+    products: (categoryId) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+
+        connection.query('SELECT * FROM products WHERE category_id = ?', categoryId, (error, results) => {
+          if (error) {
+            errorHandler(error, 'Falha ao obter os produtos', reject)
+            return false
+          }
+          resolve({ products: results })
         })
       })
     },
