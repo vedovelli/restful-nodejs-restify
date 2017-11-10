@@ -11,7 +11,7 @@ const connection = mysqlServer.createConnection({
 })
 
 const errorHandler = (error, msg, rejectFunction) => {
-  console.error(error)
+  if (error) console.error(error)
   rejectFunction({ error: msg })
 }
 
