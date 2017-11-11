@@ -26,7 +26,7 @@ const categories = deps => {
     all: () => {
       return new Promise((resolve, reject) => {
         const { connection, errorHandler } = deps
-        const query = 'SELECT c.id, c.name as category, p.id as product_id, p.category_id, p.name as product FROM products as p RIGHT JOIN categories as c ON c.id = p.category_id ORDER BY c.id'
+        const query = 'SELECT c.id, c.name, p.id as product_id, p.category_id, p.name as product FROM products as p RIGHT JOIN categories as c ON c.id = p.category_id ORDER BY c.id'
 
         connection.query(query, (error, results) => {
           if (error) {
