@@ -2,7 +2,7 @@
 const db = require('../../services/mysql')
 
 module.exports = function products (server) {
-  server.get('produto', async (req, res, next) => {
+  server.get('/produto', async (req, res, next) => {
     try {
       res.send(await db.products().all())
     } catch (error) {
@@ -11,7 +11,7 @@ module.exports = function products (server) {
     next()
   })
 
-  server.get('produto/categoria/:id', async (req, res, next) => {
+  server.get('/produto/categoria/:id', async (req, res, next) => {
     try {
       const products = await db.products().list({ category_id: req.params.id })
       res.send(products)
@@ -21,7 +21,7 @@ module.exports = function products (server) {
     next()
   })
 
-  server.get('produto/:id', async (req, res, next) => {
+  server.get('/produto/:id', async (req, res, next) => {
     try {
       res.send(await db.products().one(req.params.id))
     } catch (error) {
@@ -30,7 +30,7 @@ module.exports = function products (server) {
     next()
   })
 
-  server.post('produto', async (req, res, next) => {
+  server.post('/produto', async (req, res, next) => {
     const { name, category_id } = req.body
     try {
       res.send(await db.products().save(name, category_id))
@@ -40,7 +40,7 @@ module.exports = function products (server) {
     next()
   })
 
-  server.put('produto', async (req, res, next) => {
+  server.put('/produto', async (req, res, next) => {
     const { id, name, category_id } = req.body
     try {
       res.send(await db.products().update(id, name, category_id))
@@ -50,7 +50,7 @@ module.exports = function products (server) {
     next()
   })
 
-  server.del('produto/:id', async (req, res, next) => {
+  server.del('/produto/:id', async (req, res, next) => {
     const { id } = req.params
     try {
       res.send(await db.products().del(id))

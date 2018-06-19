@@ -10,7 +10,7 @@ const routes = (server) => {
   products(server)
   users(server)
 
-  server.post('autenticacao', async (req, res, next) => {
+  server.post('/autenticacao', async (req, res, next) => {
     try {
       const { email, password } = req.body
       res.send(await db.auth().authenticate(email, password))

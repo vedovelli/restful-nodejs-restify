@@ -2,7 +2,7 @@
 const db = require('../../services/mysql')
 
 module.exports = function users (server) {
-  server.get('usuario', async (req, res, next) => {
+  server.get('/usuario', async (req, res, next) => {
     try {
       res.send(await db.users().all())
     } catch (error) {
@@ -11,7 +11,7 @@ module.exports = function users (server) {
     next()
   })
 
-  server.get('usuario/:id', async (req, res, next) => {
+  server.get('/usuario/:id', async (req, res, next) => {
     try {
       res.send(await db.users().one(req.params.id))
     } catch (error) {
@@ -20,7 +20,7 @@ module.exports = function users (server) {
     next()
   })
 
-  server.post('usuario', async (req, res, next) => {
+  server.post('/usuario', async (req, res, next) => {
     const { email, password } = req.body
     try {
       res.send(await db.users().save(email, password))
@@ -30,7 +30,7 @@ module.exports = function users (server) {
     next()
   })
 
-  server.put('usuario', async (req, res, next) => {
+  server.put('/usuario', async (req, res, next) => {
     const { id, name } = req.body
     try {
       res.send(await db.users().update(id, name))
@@ -40,7 +40,7 @@ module.exports = function users (server) {
     next()
   })
 
-  server.del('usuario/:id', async (req, res, next) => {
+  server.del('/usuario/:id', async (req, res, next) => {
     const { id } = req.params
     try {
       res.send(await db.users().del(id))
